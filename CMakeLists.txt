@@ -9,7 +9,7 @@ project(boost LANGUAGES CXX)
 
 # exclude libraries and tools that don't work with the superproject yet
 # (e.g. due to missing dependencies or conflicting target definitions)
-set(boost_main_excluded_libs DUMMY_LIB_NAME CACHE string "List of libraries that will be excluded from cmake build")
+set(boost_main_excluded_libs yap;beast;hana;hof;thread;gil;coroutine;serialization;iostreams CACHE string "List of libraries that will be excluded from cmake build")
 set(boost_main_excluded_tools DUMMY_LIB_NAME CACHE string "List of tools that will be excluded from cmake build")
 
 message("
@@ -58,7 +58,7 @@ foreach(cmake_file IN ITEMS ${boost_tools_with_cmake_files})
         message("Ignoring boost tool: ${dir}")
     else()
         message("Adding boost tool: ${dir}")
-        add_subdirectory(${dir})
+        add_subdirectory(${dir} EXCLUDE_FROM_ALL)
     endif()
 endforeach()
 
