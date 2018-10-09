@@ -9,6 +9,8 @@ branches:
   only:
     - master
     - develop
+    - min_cmake_test
+    - boost_cmake_demo
 
 dist: trusty
 
@@ -42,6 +44,23 @@ matrix:
     - env: TRAVIS_EMPTY_JOB_WORKAROUND=true
 
   include:
+
+    - env: CMAKE_TEST=1
+      compiler: clang++
+
+      install: true
+      before_script: true
+      after_success: true
+      after_failure: true
+      after_script: true
+      script:
+        - mkdir __build__ && cd __build__
+        - cmake .. -Dboost_main_include_tools=ON -Dboost_main_excluded_libs="beast;compute;gil;hof;hana;yap;safe_numerics;coroutine;serialization;thread;iostreams;chrono;program_options"
+        - cmake --build . -- -k
+        - mkdir ../__build-shared__ && cd ../__build-shared__
+        - cmake .. -DBUILD_SHARED_LIBS=ON -Dboost_main_excluded_libs="beast;compute;gil;hof;hana;yap;safe_numerics;coroutine;serialization;thread;iostreams;chrono;program_options"
+        - cmake --build . -- -k
+
 
     - env: SCRIPT=ci_boost_release MODE=check
 
