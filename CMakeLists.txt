@@ -12,7 +12,7 @@ project(boost LANGUAGES CXX)
 # exclude libraries that don't work with the superproject yet
 # (e.g. due to missing dependencies or conflicting target definitions)
 
-set(boost_main_excluded_libs dummy1;dummy2;dummy3 CACHE string "List of libraries that will be excluded from cmake build")
+set(boost_main_excluded_libs none CACHE string "List of libraries that will be excluded from cmake build (format: lib1;lib2;lib3)")
 
 
 #~~~ options ~~~
