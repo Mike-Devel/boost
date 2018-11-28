@@ -40,6 +40,7 @@ add_definitions(-DBOOST_ALL_NO_LIB)
 # Detect and process all CMakeLists files that reside in the root folder of a library
 file(GLOB boost_libs_with_cmake_files libs/*/CMakeLists.txt)
 
+enable_testing()
 foreach(cmake_file IN ITEMS ${boost_libs_with_cmake_files})
 
     get_filename_component(dir ${cmake_file} DIRECTORY)
